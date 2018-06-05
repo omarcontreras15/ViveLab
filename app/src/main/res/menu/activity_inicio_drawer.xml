@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_cursos_ofertados"
+            android:icon="@drawable/cursos"
+            android:title="Cursos Ofertados" />
+        <item
+            android:id="@+id/nav_cursos_aprobados"
+            android:icon="@drawable/cursos_aprobados"
+            android:title="Cursos Aprobados" />
+        <item
+            android:id="@+id/nav_noticias"
+            android:icon="@drawable/icon_noticias"
+            android:title="Noticias" />
+
+        <item
+            android:id="@+id/nav_editar_usuario"
+            android:icon="@drawable/editar_usuario"
+            android:title="Editar Usuario" />
+        <item
+            android:id="@+id/nav_configuracion"
+            android:icon="@drawable/configuracion"
+            android:title="Configuración" />
+
+        <item
+            android:id="@+id/nav_acerca_de"
+            android:icon="@drawable/acerca_de"
+            android:title="Acerca de" />
+
+        <item android:title="Más información">
+
+            <menu android:title="Más información">
+                <item
+                    android:id="@+id/nav_internet"
+                    android:icon="@drawable/internet"
+                    android:title="Visita nuestra pagina" />
+
+            </menu>
+        </item>
+
+    </group>
+
+
+</menu>

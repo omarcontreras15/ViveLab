@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view_cursos_ofertados"
+    android:layout_width="fill_parent"
+    android:layout_height="200dp"
+    android:layout_margin="8dp"
+    android:background="@drawable/card_style"
+    cardview:cardCornerRadius="5dp"
+    cardview:cardElevation="4dp"
+    cardview:cardMaxElevation="6dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:id="@+id/layout_imagen_curso"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight=".55"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/imagenCurso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp"
+            android:layout_weight=".45"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/nombre_curso"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:text="Nombre Curso"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:text="Fecha ini:"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/fecha_ini"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:text="TextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:text="Fecha Fin:"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/fecha_fin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:text="TextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:text="Lugar:"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/lugar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:text="TextView" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_inscribirme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".50"
+                android:background="@drawable/btn_style"
+                android:text="Inscribirme"
+                android:textColor="@android:color/background_light"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>
