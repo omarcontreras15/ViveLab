@@ -1,4 +1,4 @@
-package co.edu.ufps.vivelab;
+package co.edu.ufps.vivelab.fragment.acerca_de;
 
 
 import android.content.Intent;
@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.Date;
+
+import co.edu.ufps.vivelab.R;
 
 
 public class AcercaDe extends Fragment {

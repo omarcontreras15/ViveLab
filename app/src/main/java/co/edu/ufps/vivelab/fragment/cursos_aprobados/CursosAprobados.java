@@ -1,4 +1,4 @@
-package co.edu.ufps.vivelab;
+package co.edu.ufps.vivelab.fragment.cursos_aprobados;
 
 
 import android.os.Bundle;
@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+
+import co.edu.ufps.vivelab.R;
+import co.edu.ufps.vivelab.fragment.curso.fragment.curso.dto.Curso;
 
 
 public class CursosAprobados extends Fragment {

@@ -41,4 +41,5 @@
     <string name="tipo_documento">Tipo De Documento</string>
     <string name="numero_documento">Numero De Documento</string>
     <string name="numero_telefono">Numero De Teléfono</string>
+    <string name="boton_cambiar_clave">Cambiar</string>
 </resources>

@@ -1,7 +1,5 @@
-package co.edu.ufps.vivelab;
+package co.edu.ufps.vivelab.fragment.curso;
 
-import android.content.Intent;
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +10,8 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
-import java.io.Serializable;
+import co.edu.ufps.vivelab.R;
+import co.edu.ufps.vivelab.fragment.curso.fragment.curso.dto.Curso;
 
 public class ViewCurso extends AppCompatActivity {
 

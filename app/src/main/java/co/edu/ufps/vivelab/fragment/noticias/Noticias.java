@@ -1,4 +1,4 @@
-package co.edu.ufps.vivelab;
+package co.edu.ufps.vivelab.fragment.noticias;
 
 
 
@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import co.edu.ufps.vivelab.R;
 
 
 public class Noticias extends Fragment {

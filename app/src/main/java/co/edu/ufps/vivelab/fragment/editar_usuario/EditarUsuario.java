@@ -1,4 +1,4 @@
-package co.edu.ufps.vivelab;
+package co.edu.ufps.vivelab.fragment.editar_usuario;
 
 
 import android.os.Bundle;
@@ -7,15 +7,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import co.edu.ufps.vivelab.R;
 
-public class Configuracion extends Fragment {
+
+public class EditarUsuario extends Fragment {
     private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        this.view=inflater.inflate(R.layout.fragment_configuracion, container, false);
+        this.view=inflater.inflate(R.layout.fragment_editar_usuario, container, false);
         return this.view;
     }
 

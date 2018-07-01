@@ -1,4 +1,4 @@
-package co.edu.ufps.vivelab;
+package co.edu.ufps.vivelab.fragment.cursos_ofertados;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +17,10 @@ import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import co.edu.ufps.vivelab.R;
+import co.edu.ufps.vivelab.fragment.curso.fragment.curso.dto.Curso;
+import co.edu.ufps.vivelab.fragment.curso.ViewCurso;
 
 public class ReclyclerViewAdapterCursosOfertados extends RecyclerView.Adapter<ReclyclerViewAdapterCursosOfertados.ViewHolder>{
     private ArrayList<Curso> cursos;

@@ -1,4 +1,4 @@
-package co.edu.ufps.vivelab;
+package co.edu.ufps.vivelab.fragment.noticias;
 
 
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +10,8 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import java.util.ArrayList;
+
+import co.edu.ufps.vivelab.R;
 
 public class RecyclerViewAdapterFacebook extends RecyclerView.Adapter<RecyclerViewAdapterFacebook.ViewHolder>{
     private ArrayList<String> publicaciones;

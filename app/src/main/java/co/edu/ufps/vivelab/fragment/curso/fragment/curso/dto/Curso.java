@@ -1,4 +1,4 @@
-package co.edu.ufps.vivelab;
+package co.edu.ufps.vivelab.fragment.curso.fragment.curso.dto;
 
 import java.io.Serializable;
 

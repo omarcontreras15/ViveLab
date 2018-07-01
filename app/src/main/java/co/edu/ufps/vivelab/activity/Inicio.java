@@ -1,4 +1,4 @@
-package co.edu.ufps.vivelab;
+package co.edu.ufps.vivelab.activity;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -16,6 +16,14 @@ import android.view.MenuItem;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Stack;
+
+import co.edu.ufps.vivelab.fragment.acerca_de.AcercaDe;
+import co.edu.ufps.vivelab.fragment.configuracion.Configuracion;
+import co.edu.ufps.vivelab.fragment.cursos_aprobados.CursosAprobados;
+import co.edu.ufps.vivelab.fragment.cursos_ofertados.CursosOfertados;
+import co.edu.ufps.vivelab.fragment.editar_usuario.EditarUsuario;
+import co.edu.ufps.vivelab.fragment.noticias.Noticias;
+import co.edu.ufps.vivelab.R;
 
 public class Inicio extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
