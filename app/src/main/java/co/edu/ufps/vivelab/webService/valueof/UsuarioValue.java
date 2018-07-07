@@ -16,6 +16,10 @@ public class UsuarioValue {
 
 	private Integer tipoUsuario;
 
+	private String toke;
+
+	private Integer persona_id;
+
 	public UsuarioValue(String email, String password, String username) {
 		this.email = email;
 		this.password = password;
@@ -91,7 +95,23 @@ public class UsuarioValue {
 		this.tipoUsuario = tipoUsuario;
 	}
 
-	@Override
+    public String getToke() {
+        return toke;
+    }
+
+    public void setToke(String toke) {
+        this.toke = toke;
+    }
+
+    public Integer getPersona_id() {
+        return persona_id;
+    }
+
+    public void setPersona_id(Integer persona_id) {
+        this.persona_id = persona_id;
+    }
+
+    @Override
 	public String toString() {
 		return "UsuarioValue [id=" + id + ", avatar=" + avatar + ", email=" + email + ", password=" + password
 				+ ", username=" + username + ", rol=" + rol + ", tipoUsuario=" + tipoUsuario + "]";

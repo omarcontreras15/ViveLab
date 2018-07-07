@@ -13,7 +13,7 @@ public class ApiAdapter {
 
     public static ApiService getApiService() {
 
-        String urlbase= "http://192.168.1.2:8080/vivelab/";
+        String urlbase= "http://192.168.1.3:8080/vivelab/";
 
         if(API_SERVICE == null){
             Retrofit retrofit = new Retrofit.Builder().baseUrl(urlbase).addConverterFactory(GsonConverterFactory.create()).build();

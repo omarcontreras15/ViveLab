@@ -1,8 +1,12 @@
 package co.edu.ufps.vivelab.webService.valueof;
 
+import java.io.Serializable;
+
 import co.edu.ufps.vivelab.webService.models.Curso;
 
-public class ConvocatoriaValue {
+public class ConvocatoriaValue implements Serializable{
+
+    private Integer id;
 
     private Integer curso_id;
 
@@ -27,6 +31,14 @@ public class ConvocatoriaValue {
 
     public ConvocatoriaValue() {
         super();
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getCurso_id() {

@@ -2,6 +2,8 @@ package co.edu.ufps.vivelab.webService.connection;
 
 import java.util.List;
 
+import co.edu.ufps.vivelab.webService.valueof.EstudianteConvocatoriaValue;
+import co.edu.ufps.vivelab.webService.valueof.EstudianteValue;
 import co.edu.ufps.vivelab.webService.valueof.RespuestaObject;
 import co.edu.ufps.vivelab.webService.valueof.ConvocatoriaValue;
 import co.edu.ufps.vivelab.webService.valueof.UsuarioValue;
@@ -20,5 +22,11 @@ public interface ApiService {
 
     @POST("usuario/login")
     Call<RespuestaObject<UsuarioValue>> login(@Body UsuarioValue user);
+
+    @POST("estudiante/registrar")
+    Call<RespuestaObject<EstudianteValue>> registrarUsuario(@Body EstudianteValue estudianteValue);
+
+    @POST("convocatoria/incribir")
+    Call<RespuestaObject<String>> registrarEnCurso(@Body EstudianteConvocatoriaValue estudianteConvocatoriaValue);
 
 }

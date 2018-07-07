@@ -1,6 +1,8 @@
 package co.edu.ufps.vivelab.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -56,6 +59,7 @@ public class Inicio extends AppCompatActivity
         this.pilaItem=new Stack<MenuItem>();
         //se guarda el item del menu de inicio por primera vez en la pila
         this.pilaItem.push(navigationView.getMenu().getItem(0));
+
     }
 
     @Override

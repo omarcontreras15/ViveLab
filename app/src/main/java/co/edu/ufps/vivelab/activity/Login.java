@@ -1,5 +1,6 @@
 package co.edu.ufps.vivelab.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import co.edu.ufps.vivelab.R;
@@ -46,7 +48,7 @@ public class Login extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        /*if(verificarInicioSesion()){
+        if(verificarInicioSesion()){
             finish();
             this.pasarActivity(Inicio.class);
         }else{
@@ -55,13 +57,13 @@ public class Login extends AppCompatActivity{
             this.mPasswordView = (EditText) findViewById(R.id.password);
             this.mLoginFormView = findViewById(R.id.login_form);
             this.mProgressView = findViewById(R.id.login_progress);
-        }*/
+        }
 
-        this.cargarEventos();
+        /*this.cargarEventos();
         this.mEmail=(EditText) findViewById(R.id.email);
         this.mPasswordView = (EditText) findViewById(R.id.password);
         this.mLoginFormView = findViewById(R.id.login_form);
-        this.mProgressView = findViewById(R.id.login_progress);
+        this.mProgressView = findViewById(R.id.login_progress);*/
     }
 
 
@@ -119,13 +121,19 @@ public class Login extends AppCompatActivity{
         startActivity(activity);
     }
 
-    private void iniciarSesion(String email, String password){
-        /*mAuth.signInWithEmailAndPassword(email, password)
+    private void iniciarSesion(final String email, final String password){
+        mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             //pasamos a la pantalla de inicio
+
+                            UsuarioValue user = new UsuarioValue(email, password, email);
+                            user.setTipoUsuario(1);
+                            Call<RespuestaObject<UsuarioValue>> call= ApiAdapter.getApiService().login(user);
+                            call.enqueue(new LoginCallBack());
+
                             finish();
                             pasarActivity(Inicio.class);
 
@@ -136,10 +144,11 @@ public class Login extends AppCompatActivity{
 
                     }
                 });
-                */
-        UsuarioValue user = new UsuarioValue(email, password, email);
+
+        /*UsuarioValue user = new UsuarioValue(email, password, email);
+        user.setTipoUsuario(1);
         Call<RespuestaObject<UsuarioValue>> call= ApiAdapter.getApiService().login(user);
-        call.enqueue(new LoginCallBack());
+        call.enqueue(new LoginCallBack());*/
 
     }
 
@@ -203,24 +212,21 @@ public class Login extends AppCompatActivity{
 
         @Override
         public void onResponse(Call<RespuestaObject<UsuarioValue>> call, Response<RespuestaObject<UsuarioValue>> response) {
-            System.out.println(response);
-            System.out.println(response.body());
-
             if(response.isSuccessful()){
+                System.out.println(response.body().toString());
                 if(response.code() == 200){
-                    SharedPreferences settings = getSharedPreferences("token", 0);
-                    SharedPreferences.Editor editor = settings.edit();
-                    editor.putBoolean("silentMode", false);
 
-                    // Commit the edits!
+                    UsuarioValue usuario = response.body().getData();
+
+                    SharedPreferences settings = getSharedPreferences("Preferencias", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putInt("estudiante_id", usuario.getPersona_id());
+                    editor.putString("token", usuario.getToke());
+
                     editor.apply();
-                    finish();
-                    pasarActivity(Inicio.class);
-                }else {
-                    Toast.makeText(getApplication(), response.body().getMensaje(),Toast.LENGTH_LONG).show();
+                    /*finish();
+                    pasarActivity(Inicio.class);*/
                 }
-            }else{
-                Toast.makeText(getApplication(),"Ha ocurrido un error, por favor intenta mas tarde", Toast.LENGTH_LONG).show();
             }
         }
 

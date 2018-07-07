@@ -37,7 +37,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="restablecer_clave">Restablecer Contraseña</string>
     <string name="nombre">Nombres</string>
-    <string name="apellidos">Apellidos</string>
+    <string name="apellido1">Primer Apellido</string>
+    <string name="apellido2">Segundo Apellido</string>
+    <string name="apellidos">Primer Apellido</string>
     <string name="tipo_documento">Tipo De Documento</string>
     <string name="numero_documento">Numero De Documento</string>
     <string name="numero_telefono">Numero De Teléfono</string>

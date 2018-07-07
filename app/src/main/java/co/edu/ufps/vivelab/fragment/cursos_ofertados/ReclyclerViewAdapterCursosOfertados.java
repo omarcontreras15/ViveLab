@@ -15,12 +15,9 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import co.edu.ufps.vivelab.R;
-import co.edu.ufps.vivelab.webService.models.Curso;
 import co.edu.ufps.vivelab.fragment.curso.ViewCurso;
 import co.edu.ufps.vivelab.webService.valueof.ConvocatoriaValue;
 
@@ -44,23 +41,22 @@ public class ReclyclerViewAdapterCursosOfertados extends RecyclerView.Adapter<Re
     public void onBindViewHolder(final ReclyclerViewAdapterCursosOfertados.ViewHolder holder, final int position) {
             holder.nombre_curso.setText(this.cursos.get(position).getCurso().getNombre());
             holder.fecha_ini.setText(this.cursos.get(position).getFecha_inicio());
-            holder.fecha_fin.setText(this.cursos.get(position).getFecha_inicio());
             holder.lugar.setText(this.cursos.get(position).getLugar());
-            holder.btn_inscribirse.setOnClickListener(new View.OnClickListener() {
+
+            holder.btn_informacion_curso.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 //evento de click sobre el boton incribirme en la cardView de cursos ofertados
                 public void onClick(View v) {
-                    Toast.makeText(context, "Se ha inscrito en el curso "+
-                            cursos.get(position).getCurso().getNombre(), Toast.LENGTH_LONG).show();
+                    pasarActivity(ViewCurso.class, cursos.get(position));
                 }
             });
             //Cargar la imagen con la liberia picasso
-            Picasso.with(this.context).load("http://192.168.43.10:80/vivelab_web/files/"+this.cursos.get(position).getFoto()).into(holder.imagen);
+            Picasso.with(this.context).load("http://192.168.1.3:80/vivelab_web/files/"+ this.cursos.get(position).getFoto().substring(6, this.cursos.get(position).getFoto().length())).into(holder.imagen);
             holder.layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    pasarActivity(ViewCurso.class, cursos.get(position).getCurso());
+                    pasarActivity(ViewCurso.class, cursos.get(position));
                 }
             });
     }
@@ -73,7 +69,7 @@ public class ReclyclerViewAdapterCursosOfertados extends RecyclerView.Adapter<Re
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView fecha_ini,fecha_fin, lugar, nombre_curso;
-        private Button btn_inscribirse;
+        private Button btn_informacion_curso;
         private ImageView imagen;
         private LinearLayout layout;
 
@@ -83,7 +79,7 @@ public class ReclyclerViewAdapterCursosOfertados extends RecyclerView.Adapter<Re
             this.fecha_fin=(TextView) itemView.findViewById(R.id.fecha_fin);
             this.lugar=(TextView) itemView.findViewById(R.id.lugar);
             this.nombre_curso=(TextView) itemView.findViewById(R.id.nombre_curso);
-            this.btn_inscribirse=(Button)itemView.findViewById(R.id.btn_inscribirme);
+            this.btn_informacion_curso = itemView.findViewById(R.id.btn_informacion_curso);
             this.imagen=(ImageView)itemView.findViewById(R.id.imagenCurso);
             this.layout= (LinearLayout) itemView.findViewById(R.id.layout_imagen_curso);
 
@@ -91,11 +87,11 @@ public class ReclyclerViewAdapterCursosOfertados extends RecyclerView.Adapter<Re
     }
 
     //metodo para pasar a una siquiete activity
-    private void pasarActivity(Class clase, Curso curso){
+    private void pasarActivity(Class clase, ConvocatoriaValue convocatoriaValue){
         Bundle bundle=new Bundle();
-        bundle.putSerializable("curso", curso);
+        bundle.putSerializable("convocatoriaValue", convocatoriaValue);
         Intent activity=new Intent(this.context,clase);
-        activity.putExtra("curso", curso);
+        activity.putExtra("convocatoriaValue", convocatoriaValue);
         this.context.startActivity(activity);
     }
 
