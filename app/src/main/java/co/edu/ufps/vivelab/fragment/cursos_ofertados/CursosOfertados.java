@@ -10,9 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import co.edu.ufps.vivelab.R;
 import co.edu.ufps.vivelab.fragment.curso.fragment.curso.dto.Curso;
+import co.edu.ufps.vivelab.webService.valueof.RespuestaObject;
+import co.edu.ufps.vivelab.webService.connection.ApiAdapter;
+import co.edu.ufps.vivelab.webService.valueof.ConvocatoriaValue;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class CursosOfertados extends Fragment {
@@ -27,33 +34,38 @@ public class CursosOfertados extends Fragment {
         this.view=inflater.inflate(R.layout.fragment_cursos_ofertados, container, false);
         this.recyclerView=(RecyclerView)view.findViewById(R.id.recycler_view_cursos_ofertados);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
-        this.reclyclerViewAdapterCursosOfertados=new ReclyclerViewAdapterCursosOfertados(this.obtenerCursosOfertados(),getContext());
-        this.recyclerView.setAdapter(reclyclerViewAdapterCursosOfertados);
+        this.initCards();
         return this.view;
     }
 
 
-    private ArrayList<Curso> obtenerCursosOfertados(){
-
-        ArrayList<Curso> cursos=new ArrayList<>();
-        Curso curso=new Curso("Adobe Premier","02/04/18", "25/04/18",
-                "Auditorio JJ Maldonado", "https://pbs.twimg.com/media/DL-s8HHWkAE7CY3.jpg", "Para implementar Serializable no tienes que hacer nada más que agregar implements Serializable a la definición de la clase (los tipicos objetos que uno usa por la mayoría ya lo implementan).", "horario", 10);
-        cursos.add(curso);
-        curso=new Curso("Video Juegos","10/05/18", "12/05/18",
-                "UDES", "https://pbs.twimg.com/media/DL-s8HLWsAIQEaG.jpg", "\n" +
-                "Si quieres agradecerme, edita tu pregunta para que sería útil para los demás. También (como eres nuevo) te comento que en stackoverflow la forma preferida de agradecer es votar positivo en respuestas o comentarios útiles y/o aceptar respuestas que te solucionaban tu problema. El mejor agradecimiento en todo caso es de publicar preguntas tal cual que respuestas que sirven a la comunidad :) ¡Bienvenido!", "Lunes-Viernes: 6 AM - 8:AM", 10);
-        cursos.add(curso);
-        curso=new Curso("Robotica","23/06/18", "30/06/18",
-                "Camara de comercio", "http://gidis.ufps.edu.co:8088/ProyectoSocial/temp/img/Hackat%C3%B3n%2013%20y%2014%20de%20Octubre.jpg", "descripcion", "horario", 10);
-        cursos.add(curso);
-        curso=new Curso("Marketing Digital","23/06/18", "30/06/18",
-                "Camara de comercio", "https://pbs.twimg.com/media/DL-s8HNW4AAxQbX.jpg", "descripcion", "horario", 10);
-        cursos.add(curso);
-        curso=new Curso("Marketing Digital","23/06/18", "30/06/18",
-                "Corel Draw", "http://www.nortedesantander.gov.co/Portals/0/xBlog/uploads/2017/6/13/IMG_2312.JPG", "descripcion", "horario", 10);
-        cursos.add(curso);
-        return cursos;
+    private void initCards(){
+        Call<RespuestaObject<List<ConvocatoriaValue>>> call = ApiAdapter.getApiService().getConvocatorias();
+        call.enqueue(new ListProjetCallBack());
     }
 
+    class ListProjetCallBack implements Callback<RespuestaObject<List<ConvocatoriaValue>>> {
 
+        @Override
+        public void onResponse(Call<RespuestaObject<List<ConvocatoriaValue>>> call, Response<RespuestaObject<List<ConvocatoriaValue>>> response) {
+            System.out.println(response);
+            System.out.println(response.body());
+            if(response.isSuccessful()){
+                if(response.code() == 200){
+                    List<ConvocatoriaValue> convocatorias = response.body().getData();
+                    if(reclyclerViewAdapterCursosOfertados == null){
+                        reclyclerViewAdapterCursosOfertados = new ReclyclerViewAdapterCursosOfertados(convocatorias, getContext());
+                    }
+                    recyclerView.setAdapter(reclyclerViewAdapterCursosOfertados);
+                }
+            }else{
+                System.out.println("------------------Ha ocurrido un error-------------------");
+            }
+        }
+
+        @Override
+        public void onFailure(Call<RespuestaObject<List<ConvocatoriaValue>>> call, Throwable t) {
+            System.out.println("------------------------Ha ocurrido un errror---------------");
+        }
+    }
 }
