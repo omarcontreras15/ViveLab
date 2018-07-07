@@ -1,6 +1,7 @@
 package co.edu.ufps.vivelab.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
@@ -15,10 +16,15 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import co.edu.ufps.vivelab.R;
+import co.edu.ufps.vivelab.webService.valueof.RespuestaObject;
+import co.edu.ufps.vivelab.webService.connection.ApiAdapter;
+import co.edu.ufps.vivelab.webService.valueof.UsuarioValue;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A login screen that offers login via email/password.
@@ -39,7 +45,8 @@ public class Login extends AppCompatActivity{
         mAuth=FirebaseAuth.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        if(verificarInicioSesion()){
+
+        /*if(verificarInicioSesion()){
             finish();
             this.pasarActivity(Inicio.class);
         }else{
@@ -48,7 +55,13 @@ public class Login extends AppCompatActivity{
             this.mPasswordView = (EditText) findViewById(R.id.password);
             this.mLoginFormView = findViewById(R.id.login_form);
             this.mProgressView = findViewById(R.id.login_progress);
-        }
+        }*/
+
+        this.cargarEventos();
+        this.mEmail=(EditText) findViewById(R.id.email);
+        this.mPasswordView = (EditText) findViewById(R.id.password);
+        this.mLoginFormView = findViewById(R.id.login_form);
+        this.mProgressView = findViewById(R.id.login_progress);
     }
 
 
@@ -68,7 +81,7 @@ public class Login extends AppCompatActivity{
 
         // Check for a valid password, if the user entered one.
         if (password.isEmpty() || !isPasswordValid(password)) {
-            mPasswordView.setError("Ingrese por favor una contraseña valida");
+            mPasswordView.setError("La contraseña debe tener mas de 3 caracteres");
             focusView = mPasswordView;
             cancel = true;
         }
@@ -76,10 +89,6 @@ public class Login extends AppCompatActivity{
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
             mEmail.setError("Por favor ingrese un e-mail");
-            focusView = mEmail;
-            cancel = true;
-        } else if (!isEmailValid(email)) {
-            mEmail.setError("Ingrese e-mail valido");
             focusView = mEmail;
             cancel = true;
         }
@@ -90,7 +99,7 @@ public class Login extends AppCompatActivity{
             focusView.requestFocus();
         } else {
             //llamamos al metodo iniciarSesion
-           this.iniciarSesion(mEmail.getText().toString().trim(), mPasswordView.getText().toString());
+           this.iniciarSesion(email, password);
         }
     }
 
@@ -111,7 +120,7 @@ public class Login extends AppCompatActivity{
     }
 
     private void iniciarSesion(String email, String password){
-        mAuth.signInWithEmailAndPassword(email, password)
+        /*mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -127,6 +136,11 @@ public class Login extends AppCompatActivity{
 
                     }
                 });
+                */
+        UsuarioValue user = new UsuarioValue(email, password, email);
+        Call<RespuestaObject<UsuarioValue>> call= ApiAdapter.getApiService().login(user);
+        call.enqueue(new LoginCallBack());
+
     }
 
     private boolean verificarInicioSesion(){
@@ -183,6 +197,37 @@ public class Login extends AppCompatActivity{
             }
         });
 
+    }
+
+    class LoginCallBack implements Callback<RespuestaObject<UsuarioValue>> {
+
+        @Override
+        public void onResponse(Call<RespuestaObject<UsuarioValue>> call, Response<RespuestaObject<UsuarioValue>> response) {
+            System.out.println(response);
+            System.out.println(response.body());
+
+            if(response.isSuccessful()){
+                if(response.code() == 200){
+                    SharedPreferences settings = getSharedPreferences("token", 0);
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putBoolean("silentMode", false);
+
+                    // Commit the edits!
+                    editor.apply();
+                    finish();
+                    pasarActivity(Inicio.class);
+                }else {
+                    Toast.makeText(getApplication(), response.body().getMensaje(),Toast.LENGTH_LONG).show();
+                }
+            }else{
+                Toast.makeText(getApplication(),"Ha ocurrido un error, por favor intenta mas tarde", Toast.LENGTH_LONG).show();
+            }
+        }
+
+        @Override
+        public void onFailure(Call<RespuestaObject<UsuarioValue>> call, Throwable t) {
+            System.out.println("------------------------Ha ocurrido un errror--------------- " + t.getMessage());
+        }
     }
 
 }

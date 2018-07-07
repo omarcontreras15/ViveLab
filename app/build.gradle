@@ -32,6 +32,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:16.0.1'
     implementation 'com.android.support:cardview-v7:27.1.1'
     implementation 'com.squareup.picasso:picasso:2.5.2'
+    // Retrofit & OkHttp
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+
+    // JSON Converter
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
